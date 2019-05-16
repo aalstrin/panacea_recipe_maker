@@ -2,16 +2,13 @@
 
 # Import the Panacea Recipe Maker 
 import sys
-sys.path.append('D:\\Projects\\python\\')
+sys.path.append('..\\..\\')
+from pathlib import Path
 from panacea_recipe_maker.recipe import *
 
 ############################
 # Ingredient specifications:
 ############################
-
-# Import the Panacea inventory
-sys.path.append('D:\\Projects\\Bryggning\\')
-import inventory
 
 pale = Malt("Pale Ale Malt", price = 13)
 wheat = Malt("Wheat Malt", price = 16)
@@ -49,5 +46,5 @@ recipe.addIngredient(time = "After cooling wort", ingredient = b4, amount = 1)
 # Generate and print recipe
 recipe.printRecipe()
 
-sys.stdout = open('recipe.txt', 'w')
+sys.stdout = open(Path(__file__).stem+'.txt', 'w')
 recipe.printRecipe()

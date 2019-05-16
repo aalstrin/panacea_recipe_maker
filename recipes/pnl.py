@@ -2,7 +2,8 @@
 
 # Import the Panacea Recipe Maker 
 import sys
-sys.path.append('D:\\Projects\\python\\')
+sys.path.append('..\\..\\')
+from pathlib import Path
 from panacea_recipe_maker.recipe import *
 
 ############################
@@ -54,5 +55,5 @@ recipe.addIngredient(time = "After cooling wort", ingredient = us_05, amount = 1
 # Generate and print recipe
 recipe.printRecipe()
 
-sys.stdout = open('recipe.txt', 'w')
+sys.stdout = open(Path(__file__).stem+'.txt', 'w')
 recipe.printRecipe()
