@@ -36,6 +36,10 @@ class Hop:
         timeFactor = (1 - exp(-0.04 * time)) /4.15
         return gravityFactor * timeFactor
         
+    def getAmount(self, ibu, time, boilGravity, finalVolume):
+        q = Hop.getHopUtilization(boilGravity, time) * self.alpha * 10
+        return (ibu)/q
+        
 class Yeast:
     'Common base class for all yeasts'
     # Specify what amount (in kg) is specified as the price unit.
