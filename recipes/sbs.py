@@ -46,5 +46,5 @@ recipe.addIngredient(time = "After cooling wort", ingredient = b4, amount = 1)
 # Generate and print recipe
 recipe.printRecipe()
 
-sys.stdout = open(Path(__file__).stem+'.txt', 'w')
+sys.stdout = open(Path(__file__).stem+'.md', 'w')
 recipe.printRecipe()

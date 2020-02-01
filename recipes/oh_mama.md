@@ -1,13 +1,10 @@
-------------------------------------------
------     Recipe for: Oh, Mama!      -----
-------------------------------------------
+# Recipe for: Oh, Mama!
 
 Goal batch size: 19 l
 Goal OG: 1.054
 
----------------------
-Grainbill and mashing
----------------------
+## Grainbill and mashing
+
 Pilsner Malt                72% 	3.127 kg 	Mash
 Pale Ale Malt               2.6% 	0.11 kg 	Mash
 Biscuit Malt                15% 	0.631 kg 	Mash
@@ -22,9 +19,8 @@ Mash time: 60 min
 Mash out at 75°C for 10 min.
 Sparge volume: 12.3642 l
 
----------------------
-Hop schedule and boil
----------------------
+## Hop schedule and boil
+
 Pre-boil volume: 24 l
 Pre-boil gravity: 1.047
 Post-boil volume: 21 l
@@ -40,9 +36,8 @@ Total IBUs: 31.9
 
 Post-boil ingredients:
 
------
-Other
------
+## Other
+
 Cost of the ingredients in recipe:
 125.11899999999999kr
 

@@ -1,13 +1,10 @@
-------------------------------------------
------   Recipe for: Pears & Lemons   -----
-------------------------------------------
+# Recipe for: Pears & Lemons
 
 Goal batch size: 19 l
 Goal OG: 1.076
 
----------------------
-Grainbill and mashing
----------------------
+## Grainbill and mashing
+
 Pale Ale Malt               91% 	6.0 kg 	Mash
 Dextrose                    9.1% 	0.6 kg 	@10 min
 Total mash grain weight: 6.0 kg
@@ -19,9 +16,8 @@ Mash time: 60 min
 Mash out at 75°C for 10 min.
 Sparge volume: 9.099999999999998 l
 
----------------------
-Hop schedule and boil
----------------------
+## Hop schedule and boil
+
 Pre-boil volume: 24 l
 Pre-boil gravity: 1.067
 Post-boil volume: 21 l
@@ -46,9 +42,8 @@ Dry hop 5 days      Jarrylo      13.4 %    40.0 g
 Dry hop 5 days      Citra        13.5 %    40.0 g	
 Dry hop 5 days      Mosaic       10.4 %    40.0 g	
 
------
-Other
------
+## Other
+
 Cost of the ingredients in recipe:
 380.2000000000001kr
 

@@ -1,13 +1,10 @@
-------------------------------------------
------Recipe for: Schweiss, Bier und Stahl - Die Arbeiterporter-----
-------------------------------------------
+# Recipe for: Schweiss, Bier und Stahl - Die Arbeiterporter
 
 Goal batch size: 19 l
 Goal OG: 1.065
 
----------------------
-Grainbill and mashing
----------------------
+## Grainbill and mashing
+
 Pale Ale Malt               71% 	3.5 kg 	Mash
 Wheat Malt                  10% 	0.5 kg 	Mash
 Peated Malt                 7.1% 	0.35 kg 	Mash
@@ -24,9 +21,8 @@ Mash time: 60 min
 Mash out at 75°C for 10 min.
 Sparge volume: 11.190000000000003 l
 
----------------------
-Hop schedule and boil
----------------------
+## Hop schedule and boil
+
 Pre-boil volume: 24 l
 Pre-boil gravity: 1.057
 Post-boil volume: 21 l
@@ -36,9 +32,8 @@ Total IBUs: 42.2
 
 Post-boil ingredients:
 
------
-Other
------
+## Other
+
 Cost of the ingredients in recipe:
 123.16999999999999kr
 

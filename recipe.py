@@ -61,18 +61,15 @@ class Recipe:
         return 1 + gPoints * (self.getPostBoilVolume()/self.getPreBoilVolume())
     
     def printName(self):
-        print("------------------------------------------")
-        print("-----" + '{:^32}'.format("Recipe for: " + self.name) + "-----")
-        print("------------------------------------------")
+        print("# Recipe for: " + self.name)
         print()
         print("Goal batch size: " + str(self.batchSize) + " l")
         print("Goal OG: " + str(self.originalGravity))
         print()
         
     def printGrainBillAndMash(self):
-        print("---------------------")
-        print("Grainbill and mashing")
-        print("---------------------")
+        print("## Grainbill and mashing")
+        print()
         getcontext().prec = 2
         for ingredient in self.ingredients:
             if type(ingredient.type) is Malt:
@@ -92,9 +89,8 @@ class Recipe:
         print()
 
     def printHopSchedule(self):
-        print("---------------------")
-        print("Hop schedule and boil")
-        print("---------------------")
+        print("## Hop schedule and boil")
+        print()
         print("Pre-boil volume: " + str(self.getPreBoilVolume()) + " l")
         getcontext().prec = 4
         print("Pre-boil gravity: " + str(Decimal(self.getPreBoilGravity()) / Decimal(1)))
@@ -129,9 +125,8 @@ class Recipe:
         print(dryHopStr)
         
     def printCost(self):
-        print("-----")
-        print("Other")
-        print("-----")
+        print("## Other")
+        print()
         print("Cost of the ingredients in recipe:")
         cost = 0.0
         for ingredient in self.ingredients:
