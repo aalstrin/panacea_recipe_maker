@@ -35,6 +35,8 @@ Total IBUs for stage: 43.5
 @0 min	Jarrylo      13.4 %    25.0 g	0 IBUs
 @0 min	Citra        13.5 %    35.0 g	0 IBUs
 @0 min	Mosaic       10.4 %    26.0 g	0 IBUs
+Total IBUs for stage: 0
+
 Total IBUs: 81.5
 
 Post-boil ingredients:

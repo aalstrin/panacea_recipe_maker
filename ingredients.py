@@ -25,11 +25,15 @@ class Hop:
         self.name = name
         self.alpha = alpha
         self.price = price / Hop.priceUnit
+        self.ibu = 0
     
     def getIBU(self, amount, time, boilGravity, finalVolume):
         # mg/l of alpha acids
-        cAlpha = (self.alpha * amount * 10) / finalVolume
-        return cAlpha * Hop.getHopUtilization(boilGravity, time)
+        if type(time) is str:
+            return 0
+        cAlpha = (self.alpha * (amount/self.amountUnit) * 10) / finalVolume        
+        self.ibu = cAlpha * Hop.getHopUtilization(boilGravity, time)
+        return self.ibu
     
     def getHopUtilization(boilGravity, time):
         gravityFactor = 1.65 * 0.000125 ** (boilGravity - 1.0)
@@ -53,7 +57,7 @@ class Yeast:
         self.price = price / Yeast.priceUnit
 
 class Ingredient:
-    def __init__(self, type, amount, time):
+    def __init__(self, type, time, amount):
         self.type = type
         self.amount = amount * type.amountUnit
         self.time = time

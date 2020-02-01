@@ -28,6 +28,8 @@ Pre-boil gravity: 1.057
 Post-boil volume: 21 l
 
 @60 min	Columbus     14.6 %    28.0 g	42.2 IBUs
+Total IBUs for stage: 42.2
+
 Total IBUs: 42.2
 
 Post-boil ingredients:

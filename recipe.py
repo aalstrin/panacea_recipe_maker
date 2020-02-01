@@ -3,11 +3,28 @@
 from panacea_recipe_maker.ingredients import Malt, Hop, Yeast, Ingredient
 from panacea_recipe_maker.printer import Printer
 
+import copy
+
 # TODOS:
 # - Calculations for gravity from fermentables?
 # - Fermentation print
 # - Other ingredients
 # - Dynamic recipe? % in malts, IBU in hops, yeast packs based on OG? Major upvote
+
+class HopStage:
+    def __init__(self, time, recipe):
+        self.time = time
+        self.ibu = 0
+        self.hops = []
+        self.preBoilGravity = recipe.getPreBoilGravity()
+        self.getPostBoilVolume = recipe.getPostBoilVolume()
+    
+    def addHop(self, ingredient):
+        hop = ingredient.type
+        print(" adding "+str(hop.ibu))
+        self.ibu = self.ibu + hop.ibu
+        self.hops.append(ingredient)
+        print("\t Hop added, stage: " + str(self.time) + " currently has " + str(self.ibu) + "IBU")
 
 class Recipe:
     'Common base class for all recipes'
@@ -21,9 +38,40 @@ class Recipe:
         self.mashOutTemp = mashOutTemp
         self.mashOutTime = mashOutTime
         self.ingredients = []
+        self.hopStages = []
         
     def addIngredient(self, ingredient, amount, time):
-        self.ingredients.append(Ingredient(ingredient, amount, time))
+        
+        print("Trying to add: " + str(ingredient.name))
+        
+        # Type specific operations
+        if(type(ingredient) is Hop):
+            newHop = copy.deepcopy(ingredient)
+        
+            if newHop.ibu == 0:
+                newHop.getIBU(amount*Hop.amountUnit, time, self.getPreBoilGravity(), self.getPostBoilVolume())
+                
+            # Is it a stage already existing?
+            currentHopStage = None
+            for hopStage in self.hopStages:
+                if (time == hopStage.time):
+                    currentHopStage = hopStage
+                    print("found")
+                    break
+                    
+            if(currentHopStage == None):            
+                # Not found, create it
+                currentHopStage = HopStage(time, self)
+                self.hopStages.append(currentHopStage)
+                
+            newIngredient = Ingredient(type = newHop, amount = amount, time = time)
+            currentHopStage.addHop(newIngredient)
+        else:
+            # Only handle hops for now
+            newIngredient = Ingredient(type = ingredient, amount = amount, time = time)
+            
+        self.ingredients.append(newIngredient)
+        print("Added: " + str(newIngredient.type.name))
         
     def getTotalMashGrains(self, comp):
         totalAmount = 0.0
@@ -60,6 +108,12 @@ class Recipe:
     def getPreBoilGravity(self):
         gPoints = self.originalGravity - 1
         return 1 + gPoints * (self.getPostBoilVolume()/self.getPreBoilVolume())
+    
+    def getTotalIBUs(self):
+        totalIbu = 0 
+        for hopStage in self.hopStages:
+            totalIbu += hopStage.ibu
+        return totalIbu            
         
     def printRecipe(self):
         Printer(self).printRecipe()

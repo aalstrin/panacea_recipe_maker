@@ -32,6 +32,8 @@ Total IBUs for stage: 15.6
 Total IBUs for stage: 10.8
 
 @15 min	Columbus     13.9 %    7.0 g	5.44 IBUs
+Total IBUs for stage: 5.44
+
 Total IBUs: 31.9
 
 Post-boil ingredients:

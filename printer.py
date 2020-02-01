@@ -48,26 +48,25 @@ class Printer:
         currentTime = -1
         stageIBU = 0
         dryHopStr = "Post-boil ingredients:\n"
-        for ingredient in self.recipe.ingredients:
-            if type(ingredient.type) is Hop:
-                nameStr = ingredient.type.name
-                alphaStr = str(ingredient.type.alpha) + " %"
-                amountStr = str(ingredient.amount / ingredient.type.amountUnit) + " " + ingredient.type.amountUnitText + "\t"
-                
-                if isinstance(ingredient.time, int): 
-                    if ingredient.time != currentTime and currentTime != -1:
-                        stageIBU = totalIbu - stageIBU
-                        print("Total IBUs for stage: " + str(Decimal(stageIBU) / Decimal(1)) + "\n")
-                    currentTime = ingredient.time                        
-                    timeStr = "@" + str(ingredient.time) + " min\t"                                       
-                    ibu = ingredient.type.getIBU(ingredient.amount / ingredient.type.amountUnit, ingredient.time, self.recipe.getPreBoilGravity(), self.recipe.getPostBoilVolume())
-                    totalIbu += ibu
-                    ibuStr = str(Decimal(ibu) / Decimal(1)) + " IBUs"
-                    print(timeStr + '{:13}'.format(nameStr) + '{:10}'.format(alphaStr) + amountStr + ibuStr)
+        for hopStage in self.recipe.hopStages:
+            boil = True
+            for ingredient in hopStage.hops:
+                hop = ingredient.type
+                nameStr = hop.name
+                alphaStr = str(hop.alpha) + " %"
+                amountStr = str(ingredient.amount / Hop.amountUnit) + " " + Hop.amountUnitText + "\t"
+            
+                if type(hopStage.time) is str:
+                    dryHopStr += '{:20}'.format(str(hopStage.time)) + '{:13}'.format(nameStr) + '{:10}'.format(alphaStr) + amountStr + "\n"
+                    boil = False
                 else:
-                    dryHopStr += '{:20}'.format(str(ingredient.time)) + '{:13}'.format(nameStr) + '{:10}'.format(alphaStr) + amountStr + "\n"
-                    
-        print("Total IBUs: " + str(Decimal(totalIbu) / Decimal(1)))
+                    timeStr = "@" + str(hopStage.time) + " min\t"                    
+                    ibuStr = str(Decimal(hop.ibu) / Decimal(1)) + " IBUs"
+                    print(timeStr + '{:13}'.format(nameStr) + '{:10}'.format(alphaStr) + amountStr + ibuStr)
+            if boil:       
+                print("Total IBUs for stage: " + str(Decimal(hopStage.ibu) / Decimal(1)) + "\n")
+            
+        print("Total IBUs: " + str(Decimal(self.recipe.getTotalIBUs()) / Decimal(1)))
         print()
         print(dryHopStr)
         
