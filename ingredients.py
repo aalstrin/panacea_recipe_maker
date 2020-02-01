@@ -42,7 +42,7 @@ class Hop:
         
     def getAmount(self, ibu, time, boilGravity, finalVolume):
         q = Hop.getHopUtilization(boilGravity, time) * self.alpha * 10
-        return (ibu)/q
+        return (ibu*finalVolume)/q
         
 class Yeast:
     'Common base class for all yeasts'

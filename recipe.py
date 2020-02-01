@@ -9,7 +9,7 @@ import copy
 # - Calculations for gravity from fermentables?
 # - Fermentation print
 # - Other ingredients
-# - Dynamic recipe? % in malts, IBU in hops, yeast packs based on OG? Major upvote
+# - Dynamic recipe? % in malts, yeast packs based on OG? Major upvote
 
 class HopStage:
     def __init__(self, time, recipe):
@@ -21,10 +21,8 @@ class HopStage:
     
     def addHop(self, ingredient):
         hop = ingredient.type
-        print(" adding "+str(hop.ibu))
         self.ibu = self.ibu + hop.ibu
         self.hops.append(ingredient)
-        print("\t Hop added, stage: " + str(self.time) + " currently has " + str(self.ibu) + "IBU")
 
 class Recipe:
     'Common base class for all recipes'
@@ -40,23 +38,21 @@ class Recipe:
         self.ingredients = []
         self.hopStages = []
         
-    def addIngredient(self, ingredient, amount, time):
-        
-        print("Trying to add: " + str(ingredient.name))
-        
+    def addIngredient(self, ingredient, time, amount = 0, ibu = 0):        
         # Type specific operations
         if(type(ingredient) is Hop):
             newHop = copy.deepcopy(ingredient)
         
-            if newHop.ibu == 0:
-                newHop.getIBU(amount*Hop.amountUnit, time, self.getPreBoilGravity(), self.getPostBoilVolume())
+            if ibu != 0:
+                amount = newHop.getAmount(ibu, time, self.getPreBoilGravity(), self.getPostBoilVolume())
+            
+            newHop.getIBU(amount*Hop.amountUnit, time, self.getPreBoilGravity(), self.getPostBoilVolume())
                 
             # Is it a stage already existing?
             currentHopStage = None
             for hopStage in self.hopStages:
                 if (time == hopStage.time):
                     currentHopStage = hopStage
-                    print("found")
                     break
                     
             if(currentHopStage == None):            
@@ -71,7 +67,6 @@ class Recipe:
             newIngredient = Ingredient(type = ingredient, amount = amount, time = time)
             
         self.ingredients.append(newIngredient)
-        print("Added: " + str(newIngredient.type.name))
         
     def getTotalMashGrains(self, comp):
         totalAmount = 0.0
