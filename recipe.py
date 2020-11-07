@@ -10,6 +10,7 @@ import copy
 # - Fermentation print
 # - Other ingredients
 # - Dynamic recipe? % in malts, yeast packs based on OG? Major upvote
+# - Add tables in md format
 
 class HopStage:
     def __init__(self, time, recipe):
@@ -68,17 +69,31 @@ class Recipe:
             
         self.ingredients.append(newIngredient)
         
-    def getTotalMashGrains(self, comp):
+    def getTotalMashGrains(self, type_str):
         totalAmount = 0.0
         for ingredient in self.ingredients:
-            if type(ingredient.type) is comp and (ingredient.time) is "Mash":
+            if type(ingredient.type) is type_str and (ingredient.time) is "Mash":
                totalAmount += ingredient.amount
         return totalAmount
         
-    def getTotalGrains(self, comp):
+    def getTotalGrains(self, type_str):
         totalAmount = 0.0
         for ingredient in self.ingredients:
-            if type(ingredient.type) is comp:
+            if type(ingredient.type) is type_str:
+               totalAmount += ingredient.amount
+        return totalAmount
+
+    def getHopVarieties(self):
+        hopVarieties = []
+        for ingredient in self.ingredients:
+            if type(ingredient.type) is Hop and not((ingredient.type.name) in hopVarieties):
+               hopVarieties.append(ingredient.type.name)
+        return hopVarieties
+
+    def getHopAmount(self, name):
+        totalAmount = 0.0
+        for ingredient in self.ingredients:
+            if type(ingredient.type) is Hop and (ingredient.type.name) is name:
                totalAmount += ingredient.amount
         return totalAmount
     

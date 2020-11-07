@@ -27,8 +27,7 @@ us_05 = Yeast("US-05", price = 29)
 recipe = Recipe("Oh, Mama!", 19, 1.054, 68)
 
 # Grain bill
-recipe.addIngredient(time = "Mash", ingredient = pilsner, amount = 3.127)
-recipe.addIngredient(time = "Mash", ingredient = pale_ale_malt, amount = 0.11)
+recipe.addIngredient(time = "Mash", ingredient = pale_ale_malt, amount = 3.237)
 recipe.addIngredient(time = "Mash", ingredient = biscuit_malt, amount = 0.631)
 recipe.addIngredient(time = "Mash", ingredient = caramunich_iii, amount = 0.234)
 recipe.addIngredient(time = "Mash", ingredient = chocolate_malt, amount = 0.18)

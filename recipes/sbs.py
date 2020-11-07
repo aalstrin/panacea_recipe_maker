@@ -20,7 +20,7 @@ roast = Malt("Roasted Barley", price = 0)
 
 columbus = Hop("Columbus", alpha = 14.6, price = 69)
 
-b4 = Yeast("B4 English Ale", price = 29)
+s04 = Yeast("S-04", price = 29)
 
 ############################
 # Recipe specifications:
@@ -41,7 +41,7 @@ recipe.addIngredient(time = "Mash", ingredient = roast, amount = 0.1)
 recipe.addIngredient(time = 60, ingredient = columbus, amount = 28)
 
 # Fermentation
-recipe.addIngredient(time = "After cooling wort", ingredient = b4, amount = 1)
+recipe.addIngredient(time = "After cooling wort", ingredient = s04, amount = 1)
 
 # Generate and print recipe
 recipe.printRecipe()

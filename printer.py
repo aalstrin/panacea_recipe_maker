@@ -24,10 +24,10 @@ class Printer:
         for ingredient in self.recipe.ingredients:
             if type(ingredient.type) is Malt:
                 nameStr = ingredient.type.name               
-                qStr = self.getFloatString(100*ingredient.amount / self.recipe.getTotalGrains(Malt), 2) + "% \t"
-                amountStr = self.getFloatString((ingredient.amount / Malt.amountUnit), 3) + " " + Malt.amountUnitText + " \t"
+                qStr = self.getFloatString(100*ingredient.amount / self.recipe.getTotalGrains(Malt), 2) + "%"
+                amountStr = self.getFloatString((ingredient.amount / Malt.amountUnit), 3) + " " + Malt.amountUnitText
                 timeStr = str(ingredient.time)
-                print('{:28}'.format(nameStr) + qStr + amountStr + timeStr)
+                print('{:30}'.format(nameStr) + '{:10}'.format(qStr) + '{:15}'.format(amountStr) + timeStr)
         print("Total mash grain weight: " + self.getFloatString(self.recipe.getTotalMashGrains(Malt),3) + " " + Malt.amountUnitText)
         print("Total grain weight: " + self.getFloatString(self.recipe.getTotalGrains(Malt), 3) + " " + Malt.amountUnitText)
         print()
@@ -45,9 +45,6 @@ class Printer:
         print("Pre-boil gravity: " + self.getFloatString(self.recipe.getPreBoilGravity(), 4))
         print("Post-boil volume: " + str(self.recipe.getPostBoilVolume()) + " l\n")
         
-        totalIbu = 0;
-        currentTime = -1
-        stageIBU = 0
         dryHopStr = "Post-boil ingredients:\n"
         for hopStage in self.recipe.hopStages:
             boil = True
@@ -55,21 +52,25 @@ class Printer:
                 hop = ingredient.type
                 nameStr = hop.name
                 alphaStr = str(hop.alpha) + " %"
-                amountStr = self.getFloatString(ingredient.amount / Hop.amountUnit, 3) + " " + Hop.amountUnitText + "\t"
+                amountStr = self.getFloatString(ingredient.amount / Hop.amountUnit, 3) + " " + Hop.amountUnitText
             
                 if type(hopStage.time) is str:
-                    dryHopStr += '{:20}'.format(str(hopStage.time)) + '{:13}'.format(nameStr) + '{:10}'.format(alphaStr) + amountStr + "\n"
+                    dryHopStr += '{:20}'.format(str(hopStage.time)) + '{:25}'.format(nameStr) + '{:10}'.format(alphaStr) + amountStr + "\n"
                     boil = False
                 else:
-                    timeStr = "@" + str(hopStage.time) + " min\t"                    
+                    timeStr = "@" + str(hopStage.time) + " min"                    
                     ibuStr = self.getFloatString(hop.ibu, 3) + " IBUs"
-                    print(timeStr + '{:13}'.format(nameStr) + '{:10}'.format(alphaStr) + amountStr + ibuStr)
+                    print('{:10}'.format(timeStr) + '{:25}'.format(nameStr) + '{:10}'.format(alphaStr) + '{:10}'.format(amountStr) + ibuStr)
             if boil:       
                 print("Total IBUs for stage: " + self.getFloatString(hopStage.ibu, 3) + "\n")
             
         print("Total IBUs: " + self.getFloatString(self.recipe.getTotalIBUs(), 3))
         print()
         print(dryHopStr)
+        print("Amount of hop varieties")
+        for hop in self.recipe.getHopVarieties():
+            print('{:25}'.format(hop) + ": " + self.getFloatString(self.recipe.getHopAmount(hop) / Hop.amountUnit, 3) + " " + Hop.amountUnitText)
+        print()
         
     def printCost(self):
         print("## Other")
